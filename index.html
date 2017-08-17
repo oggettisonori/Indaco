@@ -5,14 +5,9 @@
 	<style>
         .container
 {
-    
     margin: 5%;
     width: 80%;
-    
     padding: 5%;
-    
-    
-    
     top: 5%;
     background-color: transparent;
 }
@@ -70,21 +65,21 @@
 </head>
 <body>
 	<div class="container">
-		<div class="button"  data-sound="audio/5.mp3"><img src="svg/5.svg" alt="Smiley face" height="100%" width="100%"></div>
-		<div class="button"  data-sound="audio/6.mp3"><img src="svg/6.svg" alt="Smiley face" height="100%" width="100%"></div>
-		<div class="button"  data-sound="audio/7.mp3"><img src="svg/7.svg" alt="Smiley face" height="100%" width="100%"></div>
-		<div class="button"  data-sound="audio/8.mp3"><img src="svg/8.svg" alt="Smiley face" height="100%" width="100%"></div>
-		<div class="button"  data-sound="audio/1.mp3"><img src="svg/1.svg" alt="Smiley face" height="100%" width="100%"></div>
-        <div class="button"  data-sound="audio/2.mp3"><img src="svg/2.svg" alt="Smiley face" height="100%" width="100%"></div>
-        <div class="button"  data-sound="audio/3.mp3"><img src="svg/3.svg" alt="Smiley face" height="100%" width="100%"></div>
-        <div class="button"  data-sound="audio/4.mp3"><img src="svg/4.svg" alt="Smiley face" height="100%" width="100%"></div>
-        </div>
+		<div class="button"  data-sound="audio/5.mp3"><img src="svg/5.svg" alt="Sol" height="100%" width="100%"></div>
+		<div class="button"  data-sound="audio/6.mp3"><img src="svg/6.svg" alt="La"  height="100%" width="100%"></div>
+		<div class="button"  data-sound="audio/7.mp3"><img src="svg/7.svg" alt="Si"  height="100%" width="100%"></div>
+		<div class="button"  data-sound="audio/8.mp3"><img src="svg/8.svg" alt="Do"  height="100%" width="100%"></div>
+		<div class="button"  data-sound="audio/1.mp3"><img src="svg/1.svg" alt="Do"  height="100%" width="100%"></div>
+                <div class="button"  data-sound="audio/2.mp3"><img src="svg/2.svg" alt="Re"  height="100%" width="100%"></div>
+                <div class="button"  data-sound="audio/3.mp3"><img src="svg/3.svg" alt="Mi"  height="100%" width="100%"></div>
+                <div class="button"  data-sound="audio/4.mp3"><img src="svg/4.svg" alt="Fa"  height="100%" width="100%"></div>
+                </div>
 	
 	
 
 	<script>
         
-	//http://stackoverflow.com/questions/23687635/how-to-stop-audio-in-an-iframe-using-web-audio-api-after-hiding-its-container-di
+	
 	(function(){
 		var log = console.log.bind(console), 
 				deviceInfoInputs = document.getElementById('inputs'), deviceInfoOutputs = document.getElementById('outputs'), midi;
@@ -94,7 +89,7 @@
 		var btnBox = document.getElementById('content'), btn = document.getElementsByClassName('button');
 		var data, cmd, channel, type, note, velocity;
 
-		// request MIDI access
+		
 		if(navigator.requestMIDIAccess){
 			navigator.requestMIDIAccess({sysex: false}).then(onMIDISuccess, onMIDIFailure);
 		}
@@ -103,7 +98,7 @@
 		}
 
 		
-		// prepare audio files
+		
 		for(var i = 0; i < btn.length; i++){
 			addAudioProperties(btn[i]);
 		}
@@ -120,48 +115,41 @@
             
 		};
 		
-        // midi functions
+        
 		function onMIDISuccess(midiAccess){
 			midi = midiAccess;
 			var inputs = midi.inputs.values();
-			// loop through all inputs
+			
 			for(var input = inputs.next(); input && !input.done; input = inputs.next()){
-				// listen for midi messages
+				
 				input.value.onmidimessage = onMIDIMessage;
 
 				listInputs(input);
 			}
-			// listen for connect/disconnect message
+			
 			midi.onstatechange = onStateChange;
 
-			//showMIDIPorts(midi);
+			
 		}
 
 		function onMIDIMessage(event){
 			data = event.data,
 			cmd = data[0] >> 4,
 			channel = data[0] & 0xf,
-			type = data[0] & 0xf0, // channel agnostic message type. Thanks, Phil Burk.
+			type = data[0] & 0xf0, 
 			note = data[1],
 			velocity = data[2];
-			// with pressure and tilt off
-			// note off: 128, cmd: 8 
-			// note on: 144, cmd: 9
-			// pressure / tilt on
-			// pressure: 176, cmd 11: 
-			// bend: 224, cmd: 14
-			log('MIDI data', data);
+		        log('MIDI data', data);
 			switch(type){
-				case 144: // noteOn message 
+				case 144: 
 					noteOn(note, velocity);
 					break;
-				case 128: // noteOff message 
+				case 128: 
 					noteOff(note, velocity);
 					break;
 			}
 			
-			//log('data', data, 'cmd', cmd, 'channel', channel);
-			//logger(keyData, 'key data', data);
+			
 		}
 
 		function onStateChange(event){
@@ -203,7 +191,7 @@
 			log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + e);
 		}
 
-		// MIDI utility functions
+		
 		function showMIDIPorts(midiAccess){
 			var inputs = midiAccess.inputs,
 					outputs = midiAccess.outputs, 
@@ -231,7 +219,7 @@
 			deviceInfoOutputs.innerHTML = html + '</div>';
 		}
 
-		// audio functions
+		
 		function loadAudio(object, url){
 			var request = new XMLHttpRequest();
 			request.open('GET', url, true);
@@ -270,7 +258,7 @@
 			}
 		}
 
-		// utility functions
+		
 		
 
 		function rangeMap(x, a1, a2, b1, b2){
