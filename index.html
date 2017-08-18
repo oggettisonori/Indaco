@@ -115,6 +115,15 @@
             
 		};
 		
+		function clickPlayOn(e) {
+    e.target.classList.add('active');
+    e.target.play();
+}
+
+function clickPlayOff(e) {
+    e.target.classList.remove('active');
+}
+		
         
 		function onMIDISuccess(midiAccess){
 			midi = midiAccess;
