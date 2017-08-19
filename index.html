@@ -115,63 +115,6 @@
             
 		};
 		
-		function clickPlayOn(e) {
-    e.target.classList.add('active');
-    e.target.play();
-}
-
-function clickPlayOff(e) {
-    e.target.classList.remove('active');
-}
-		// qwerty keyboard controls. [q,w,e,r,t]
-function keyController(e) {
-    if (e.type == "keydown") {
-        switch (e.keyCode) {
-            case 81:
-                btn[0].classList.add('active');
-                btn[0].play();
-                break;
-            case 87:
-                btn[1].classList.add('active');
-                btn[1].play();
-                break;
-            case 69:
-                btn[2].classList.add('active');
-                btn[2].play();
-                break;
-            case 82:
-                btn[3].classList.add('active');
-                btn[3].play();
-                break;
-            case 84:
-                btn[4].classList.add('active');
-                btn[4].play();
-                break;
-            default:
-                //console.log(e);
-        }
-    } else if (e.type == "keyup") {
-        switch (e.keyCode) {
-            case 81:
-                btn[0].classList.remove('active');
-                break;
-            case 87:
-                btn[1].classList.remove('active');
-                break;
-            case 69:
-                btn[2].classList.remove('active');
-                break;
-            case 82:
-                btn[3].classList.remove('active');
-                break;
-            case 84:
-                btn[4].classList.remove('active');
-                break;
-            default:
-	
-		  }
-    }
-}
         
 		function onMIDISuccess(midiAccess){
 			midi = midiAccess;
