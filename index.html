@@ -250,6 +250,13 @@ function clickPlayOff(e) {
                 return ((x - a1) / (a2 - a1)) * (b2 - b1) + b1;
             }
         })();
+        
+        document.getElementById('nota').oncontextmenu = function(event) {
+    event.preventDefault();
+    event.stopPropagation(); // not necessary in my case, could leave in case stopImmediateProp isn't available? 
+    event.stopImmediatePropagation();
+    return false;
+};
     </script>
 </body>
 
