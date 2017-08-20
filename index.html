@@ -71,7 +71,7 @@
 
 
     <script>
-        $("body").on("contextmenu", my_selector, function() { return false; });
+        $("body").on("contextmenu", container, function() { return false; });
         (function() {
             var log = console.log.bind(console),
                 deviceInfoInputs = document.getElementById('inputs'),
