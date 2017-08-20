@@ -127,6 +127,16 @@
 function clickPlayOff(e) {
     e.target.classList.remove('active');
 }
+            
+                document.getElementById('nota').oncontextmenu = function(event) {
+    event.preventDefault();
+    event.stopPropagation(); // not necessary in my case, could leave in case stopImmediateProp isn't available? 
+    event.stopImmediatePropagation();
+    return false;
+};
+            
+            
+            
             function onMIDISuccess(midiAccess) {
                 midi = midiAccess;
                 var inputs = midi.inputs.values();
@@ -251,12 +261,7 @@ function clickPlayOff(e) {
             }
         })();
         
-        document.getElementById('nota').oncontextmenu = function(event) {
-    event.preventDefault();
-    event.stopPropagation(); // not necessary in my case, could leave in case stopImmediateProp isn't available? 
-    event.stopImmediatePropagation();
-    return false;
-};
+    
     </script>
 </body>
 
