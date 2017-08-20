@@ -11,22 +11,16 @@
             top: 5%;
             background-color: transparent;
         }
-
-
         .button {
             display: inline-grid;
             width: 20%;
             height: 20%;
-
             margin: 2%;
         }
-
         .button.active {
-
             opacity: 1;
             animation: shake .2s ease-in-out;
         }
-
         @keyframes shake {
             0% {
                 transform: translateX(0);
@@ -87,8 +81,6 @@
             var btnBox = document.getElementById('content'),
                 btn = document.getElementsByClassName('button');
             var data, cmd, channel, type, note, velocity;
-
-
             if (navigator.requestMIDIAccess) {
                 navigator.requestMIDIAccess({
                     sysex: false
@@ -96,28 +88,28 @@
             } else {
                 alert("No MIDI support in your browser.");
             }
-
-
-            
-            
-
-
+            for (var i = 0; i < btn.length; i++) {
+                addAudioProperties(btn[i]);
+            }
+            var sampleMap = {
+                key64: 1,
+                key65: 2,
+                key66: 3,
+                key67: 4,
+                key60: 5,
+                key61: 6,
+                key62: 7,
+                key63: 8,
+            };
             function onMIDISuccess(midiAccess) {
                 midi = midiAccess;
                 var inputs = midi.inputs.values();
-
                 for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
-
                     input.value.onmidimessage = onMIDIMessage;
-
                     listInputs(input);
                 }
-
                 midi.onstatechange = onStateChange;
-
-
             }
-
             function onMIDIMessage(event) {
                 data = event.data,
                     cmd = data[0] >> 4,
@@ -134,10 +126,7 @@
                         noteOff(note, velocity);
                         break;
                 }
-
-
             }
-
             function onStateChange(event) {
                 showMIDIPorts(midi);
                 var port = event.port,
@@ -146,28 +135,23 @@
                     type = port.type;
                 if (type == "input")
                     log("name", name, "port", port, "state", state);
-
             }
-
             function listInputs(inputs) {
                 var input = inputs.value;
                 log("Input port : [ type:'" + input.type + "' id: '" + input.id +
                     "' manufacturer: '" + input.manufacturer + "' name: '" + input.name +
                     "' version: '" + input.version + "']");
             }
-
             function noteOn(midiNote, velocity) {
                 player(midiNote, velocity);
             }
-
             function noteOff(midiNote, velocity) {
                 player(midiNote, velocity);
             }
-
             function player(note, velocity) {
                 var sample = sampleMap['key' + note];
                 if (sample) {
-                    if (type == (0x80 & 0xf0) || velocity == 0) { 
+                    if (type == (0x80 & 0xf0) || velocity == 0) { //needs to be fixed for QuNexus, which always returns 144
                         btn[sample - 1].classList.remove('active');
                         return;
                     }
@@ -175,12 +159,9 @@
                     btn[sample - 1].play(velocity);
                 }
             }
-
             function onMIDIFailure(e) {
                 log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + e);
             }
-
-
             function showMIDIPorts(midiAccess) {
                 var inputs = midiAccess.inputs,
                     outputs = midiAccess.outputs,
@@ -196,7 +177,6 @@
                     }
                 });
                 deviceInfoInputs.innerHTML = html + '</div>';
-
                 html = '<h4>MIDI Outputs:</h4><div class="info">';
                 outputs.forEach(function(port) {
                     html += '<p>' + port.name + '<br>';
@@ -207,8 +187,6 @@
                 });
                 deviceInfoOutputs.innerHTML = html + '</div>';
             }
-
-
             function loadAudio(object, url) {
                 var request = new XMLHttpRequest();
                 request.open('GET', url, true);
@@ -220,7 +198,6 @@
                 }
                 request.send();
             }
-
             function addAudioProperties(object) {
                 object.name = object.id;
                 object.source = object.dataset.sound;
@@ -237,25 +214,15 @@
                         g.gain.value = v;
                         g.connect(context.destination);
                     } else {
-
                         s.connect(context.destination);
                     }
-
                     s.start();
                     object.s = s;
                 }
             }
-
-
-
-
             function rangeMap(x, a1, a2, b1, b2) {
                 return ((x - a1) / (a2 - a1)) * (b2 - b1) + b1;
             }
-
-
-
-
         })();
     </script>
 </body>
