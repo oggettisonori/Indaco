@@ -61,14 +61,14 @@
 <body>
     
     <div class="container">
-        <img class="button" id="note1" data-sound="audio/5.mp3" src="svg/5.svg" alt="Sol">
-        <img class="button" id="note2" data-sound="audio/6.mp3" src="svg/6.svg" alt="La">
-        <img class="button" id="note3" data-sound="audio/7.mp3" src="svg/7.svg" alt="Si">
-        <img class="button" id="note4" data-sound="audio/8.mp3" src="svg/8.svg" alt="Do">
-        <img class="button" id="note5" data-sound="audio/1.mp3" src="svg/1.svg" alt="Do">
-        <img class="button" id="note6" data-sound="audio/2.mp3" src="svg/2.svg" alt="Re">
-        <img class="button" id="note7" data-sound="audio/3.mp3" src="svg/3.svg" alt="Mi">
-        <img class="button" id="note8" data-sound="audio/4.mp3" src="svg/4.svg" alt="Fa">
+        <img class="button" id="nota" data-sound="audio/5.mp3" src="svg/5.svg" alt="Sol">
+        <img class="button" id="nota" data-sound="audio/6.mp3" src="svg/6.svg" alt="La">
+        <img class="button" id="nota" data-sound="audio/7.mp3" src="svg/7.svg" alt="Si">
+        <img class="button" id="nota" data-sound="audio/8.mp3" src="svg/8.svg" alt="Do">
+        <img class="button" id="nota" data-sound="audio/1.mp3" src="svg/1.svg" alt="Do">
+        <img class="button" id="nota" data-sound="audio/2.mp3" src="svg/2.svg" alt="Re">
+        <img class="button" id="nota" data-sound="audio/3.mp3" src="svg/3.svg" alt="Mi">
+        <img class="button" id="nota" data-sound="audio/4.mp3" src="svg/4.svg" alt="Fa">
         
     </div>
 
@@ -127,7 +127,7 @@
 function clickPlayOff(e) {
     e.target.classList.remove('active');
 }
-                       document.getElementById('note1').oncontextmenu = function(event) {
+                       document.getElementById('nota').oncontextmenu = function(event) {
     event.preventDefault();
     event.stopPropagation(); // not necessary in my case, could leave in case stopImmediateProp isn't available? 
     event.stopImmediatePropagation();
