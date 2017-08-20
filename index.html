@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
     <title>Indaco</title>
-    
+    <script>
+        document.getElementById("button").addEventListener("click", function() {
+  document.documentElement.requestFullScreen();
+  screen.orientation.lock("portrait-primary");
+ 
+ }, false);
+        
+        </script>
+        
     <style>
         
        
@@ -93,13 +101,7 @@
     <script>
         
     
-        
-        
-        document.getElementById("button").addEventListener("click", function() {
-  document.documentElement.requestFullScreen();
-  screen.orientation.lock("portrait-landscape");
- 
- }, false);
+      
         
         
         (function() {
