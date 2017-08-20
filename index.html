@@ -98,7 +98,10 @@
             }
 
 
-
+            for (var i = 0; i < btn.length; i++) {
+            btn[i].addEventListener('mousedown', clickPlayOn);
+            btn[i].addEventListener('mouseup', clickPlayOff
+                                    
             for (var i = 0; i < btn.length; i++) {
                 addAudioProperties(btn[i]);
             }
@@ -114,6 +117,16 @@
                 key63: 8,
 
             };
+            
+             function clickPlayOn(e) {
+                  e.target.classList.add('active');
+                  e.target.play();
+            }
+
+             function clickPlayOff(e) {
+             e.target.classList.remove('active');
+            }
+            
 
 
             function onMIDISuccess(midiAccess) {
@@ -181,7 +194,7 @@
             function player(note, velocity) {
                 var sample = sampleMap['key' + note];
                 if (sample) {
-                    if (type == (0x80 & 0xf0) || velocity == 0) { //needs to be fixed for QuNexus, which always returns 144
+                    if (type == (0x80 & 0xf0) || velocity == 0) { 
                         btn[sample - 1].classList.remove('active');
                         return;
                     }
