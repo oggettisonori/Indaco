@@ -81,7 +81,7 @@
                 deviceInfoInputs = document.getElementById('inputs'),
                 deviceInfoOutputs = document.getElementById('outputs'),
                 midi;
-
+            window.AudioContext = window.AudioContext||window.webkitAudioContext;
             var context = new AudioContext();
             var activeNotes = [];
             var btnBox = document.getElementById('content'),
