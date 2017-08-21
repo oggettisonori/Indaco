@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
     <title>Indaco</title>
-  <link rel="manifest" href="script/manifest.json">
+  <Script type=text/javascript src="script/cookieManager.js"></Script>
+<script type=text/javascript src="script/jquery-2.1.3.min.js"></script>
         
     <style>
         
@@ -72,6 +73,229 @@
 </head>
     
 
+ <section id="wrapper">
+<article>
+
+
+
+
+<div class="showresult">
+			<h2>Screen Orientation</h2>
+			<p style="color:blue"> Try the demo to see if your browser supports this feature </p>
+
+
+      <h1>Screen Orientation API</h1>
+
+      <span id="so-unsupported" class="api-support hidden">API not supported</span>
+      <span id="soo-supported" class="api-support hidden">Old API version supported</span>
+
+      <div id="so-results">
+         <ul>
+            <li>
+               The orientation of the device is <span id="orientation" class="value">landscape-primary</span>.
+            </li>
+            <li class="new-api">
+               The angle of the device is <span id="angle" class="value">0</span>.
+            </li>
+         </ul>
+
+         <form>
+            <label for="orientation-type">Lock the device in:</label>
+            <select id="orientation-type">
+               <option value="any">any</option>
+               <option value="natural">natural</option>
+               <option value="portrait">portrait</option>
+               <option value="landscape">landscape</option>
+               <option value="portrait-primary">portrait-primary</option>
+               <option value="portrait-secondary">portrait-secondary</option>
+               <option value="landscape-primary">landscape-primary</option>
+               <option value="landscape-secondary">landscape-secondary</option>
+            </select>
+            <br>
+            <input class="button-demo" id="lock-button" type="submit" value="Lock!">
+            <input class="button-demo" id="unlock-button" type="reset" value="Unlock!">
+         </form>
+      </div>
+
+		
+		
+			<p><label id="test"><b>Test Result:</b></label></p>
+			<p id="status"></p>
+</div>
+
+
+	
+</body>
+
+
+
+<script>
+         var prefix = 'orientation' in screen ? '' :
+                      'mozOrientation' in screen ? 'moz' :
+                      'msOrientation' in screen ? 'ms' :
+                      null;
+
+         if (prefix === null) {
+            document.getElementById('so-unsupported').classList.remove('hidden');
+
+            ['lock-button', 'unlock-button'].forEach(function(elementId) {
+               document.getElementById(elementId).setAttribute('disabled', 'disabled');
+            });
+         } else {
+            var select = document.getElementById('orientation-type');
+            var orientationElem = document.getElementById('orientation');
+            var onChangeHandler;
+
+            var Fullscreen = {
+               launch: function(element) {
+                  if(element.requestFullscreen) {
+                     element.requestFullscreen();
+                  } else if(element.mozRequestFullScreen) {
+                     element.mozRequestFullScreen();
+                  } else if(element.webkitRequestFullscreen) {
+                     element.webkitRequestFullscreen();
+                  } else if(element.msRequestFullscreen) {
+                     element.msRequestFullscreen();
+                  }
+               },
+               exit: function() {
+                  if(document.exitFullscreen) {
+                     document.exitFullscreen();
+                  } else if(document.mozCancelFullScreen) {
+                     document.mozCancelFullScreen();
+                  } else if(document.webkitExitFullscreen) {
+                     document.webkitExitFullscreen();
+                  } else if (document.msExitFullscreen) {
+                     document.msExitFullscreen();
+                  }
+               }
+            };
+
+            // Determine what version of the API is implemented
+            if ('orientation' in screen && 'angle' in screen.orientation) {
+               // The browser supports the new version of the API
+
+               // Show the properties supported by the new version
+               var newProperties = document.getElementsByClassName('new-api');
+               for(var i = 0; i < newProperties.length; i++) {
+                  newProperties[i].classList.remove('hidden');
+               }
+
+               document.getElementById('lock-button').addEventListener('click', function (event) {
+                  event.preventDefault();
+                  Fullscreen.launch(document.documentElement);
+                  screen.orientation.lock(select.value);
+               });
+
+               document.getElementById('unlock-button').addEventListener('click', function (event) {
+                  event.preventDefault();
+                  Fullscreen.exit();
+                  screen.orientation.unlock();
+               });
+
+               var angleElem = document.getElementById('angle');
+               onChangeHandler = function() {
+                  orientationElem.textContent = screen.orientation.type;
+                  angleElem.textContent = screen.orientation.angle;
+               };
+               screen.orientation.addEventListener('change', onChangeHandler);
+               onChangeHandler();
+            } else {
+               // The browser supports the old version of the API, so the user is informed of that
+               document.getElementById('soo-supported').classList.remove('hidden');
+
+               // Remove the options that aren't available in the old version of the API
+               var unavailableOptions = [
+                  document.querySelector('#orientation-type option[value="any"]'),
+                  document.querySelector('#orientation-type option[value="natural"]')
+               ];
+               for(var i = 0; i < unavailableOptions.length; i++) {
+                  unavailableOptions[i].parentElement.removeChild(unavailableOptions[i]);
+               }
+
+               document.getElementById('lock-button').addEventListener('click', function (event) {
+                  event.preventDefault();
+                  Fullscreen.launch(document.documentElement);
+
+                  setTimeout(function () {
+                     screen[prefix + (prefix === '' ? 'l' : 'L') + 'ockOrientation'](select.value);
+                  }, 1);
+               });
+               document.getElementById('unlock-button').addEventListener('click', function (event) {
+                  event.preventDefault();
+                  screen[prefix + (prefix === '' ? 'u' : 'U') + 'nlockOrientation']();
+                  Fullscreen.exit();
+               });
+
+               onChangeHandler = function() {
+                  var orientationProperty = prefix + (prefix === '' ? 'o' : 'O') + 'rientation';
+                  orientationElem.textContent = screen[orientationProperty];
+               };
+               screen.addEventListener(prefix + 'orientationchange', onChangeHandler);
+               onChangeHandler();
+            }
+         }
+      </script>
+
+
+<script type="text/javascript">	
+
+	
+    var title = "Screen Orientation";
+	var title_comment = title+"-comment";
+	var test_result = document.getElementById("status");
+
+	
+
+	try{
+
+
+		var prefix = 'orientation' in screen ? '' :
+                      'mozOrientation' in screen ? 'moz' :
+                      'msOrientation' in screen ? 'ms' :
+                      null;
+
+    
+    	
+    	if(prefix!=null){
+		
+			test_result.className = "success";
+			test_result.innerHTML ='Your browser supports Screen Orientation!';
+			//addCookie(title,"y",1)
+		}
+		else{
+			test_result.innerHTML ='Your browser does not support Screen Orientation';
+			test_result.className = "fail";
+			//addCookie(title,"n",1)
+
+		}
+	  	
+	} 
+
+	catch(ex){
+
+		test_result.innerHTML ='Your browser does not support Screen Orientation';
+		test_result.className = "fail";
+		//addCookie(title,"n",1)
+
+	}
+
+	//addCookie(title_comment," ",1);
+
+	//JSONParser(title,"jsapi");
+	
+
+</script>   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 <body>
     
     <div id="container">
