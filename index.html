@@ -62,11 +62,17 @@
             }
         }
 
-    /* for all screens */
+   
 #container {display: none;}
+#alert {display: none;}	    
 
-/* only when orientation is in portrait mode */
-@media all and (orientation:portrait) {
+
+@media all and (orientation:landscape) {
+    #container {
+         display: block;
+    }
+}
+	    @media all and (orientation:portrait) {
     #container {
          display: block;
     }
@@ -74,7 +80,10 @@
 
     </style>
 </head>
-	<body>    
+	<body>  
+		<div id="alert">
+		<img src="svg/landscape.svg" alt="alert">	
+		</div>
     
     <div id="container">
         
