@@ -207,7 +207,7 @@
                   event.preventDefault();
                   Fullscreen.launch(document.documentElement);
                   setTimeout(function () {
-                     screen[prefix + (prefix === '' ? 'l' : 'L') + 'ockOrientation'](select.value);
+                     screen[prefix + (prefix === '' ? 'l' : 'L') + 'ockOrientation'](select.landscape);
                   }, 1);
                });
                document.getElementById('unlock-button').addEventListener('click', function (event) {
