@@ -60,6 +60,17 @@
                 transform: translateY(0);
             }
         }
+	    @media screen and (orientation:landscape) {
+
+  #container {
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+    width: /* screen width */ ;
+    height: /* screen height */ ;
+    overflow: scroll;
+  }
+}
     
 
     </style>
@@ -85,10 +96,7 @@
 
     <script>
 	    
-	    var elem = document.getElementById("container");
-else (elem.requestFullscreen) {
-  elem.requestFullscreen();
-}
+	  
         
 	   
     
