@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "This Area is Password Protected"
-AuthUserFile /oggettisonori.github.io.htpasswd
-Require valid-user
