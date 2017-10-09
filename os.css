@@ -10,9 +10,9 @@
             display: inline-grid;
 		width: 20%;
 		padding: 2%;
-            
+        opacity: 0.4;    
 		
-		filter:drop-shadow(8px 8px 4px black);
+		
             
 		}
         
@@ -20,8 +20,8 @@
         
         
         .button.active {
+          opacity: 1;
           
-            filter:drop-shadow(4px 4px 5px black);
             
         }
         
@@ -32,7 +32,7 @@
 	    
 	    display: block;
 	    
-	   max-width:90%;
+	   max-width:85%;
         
 	    
 	    
