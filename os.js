@@ -175,7 +175,7 @@ function clickPlayOff(e) {
                     s.buffer = object.buffer;
                     s.playbackRate.value = 1;
                     if (volume) {
-                        v = rangeMap(volume, 1, 127, 1, 1);
+                        v = rangeMap(volume, 1, 127, 0, 1);
                         s.connect(g);
                         g.gain.value = v;
                         g.connect(context.destination);
