@@ -31,8 +31,8 @@
             for (var i = 0; i < btn.length; i++) {
     btn[i].addEventListener('mousedown', clickPlayOn);
   btn[i].addEventListener('mouseup', clickPlayOff);
-    btn[i].addEventListener('touchend', clickPlayOn);
-   btn[i].addEventListener('touchend', clickPlayOff);
+    btn[i].addEventListener('touchstart', clickPlayOn);
+   btn[i].addEventListener('touchstart', clickPlayOff);
 }
             
             
