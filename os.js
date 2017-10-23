@@ -10,16 +10,7 @@
         
         
         (function() {
-            var touchmoved;
-$('button').on('touchend', function(e){
-    if(touchmoved != true){
-        // you're on button click action
-    }
-}).on('touchmove', function(e){
-    touchmoved = true;
-}).on('touchstart', function(){
-    touchmoved = false;
-});
+            
             var log = console.log.bind(console),
                 deviceInfoInputs = document.getElementById('inputs'),
                 deviceInfoOutputs = document.getElementById('outputs'),
@@ -40,9 +31,11 @@ $('button').on('touchend', function(e){
             for (var i = 0; i < btn.length; i++) {
     btn[i].addEventListener('mousedown', clickPlayOn);
   btn[i].addEventListener('mouseup', clickPlayOff);
-    btn[i].addEventListener('touchstart', clickPlayOn);
-   btn[i].addEventListener('touchend', clickPlayOff);
+    btn[i].addEventListener('touchenter', clickPlayOn);
+   btn[i].addEventListener('touchleave', clickPlayOff);
 }
+            
+            
             
              document.getElementById('container').oncontextmenu = function(event) {
     event.preventDefault();
