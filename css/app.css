@@ -1,0 +1,42 @@
+:root {
+  
+  color: #fff;
+  font: 300 14px / 1.2 Helvetica Neue, sans-serif;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.mpc {
+  display: grid;
+  grid-gap: 4rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  padding: 8rem;
+  width: 100%;
+}
+
+.mpc__pad {
+  align-items: center;
+  background-color: #333;
+  border: 1px solid #666;
+  display: flex;
+  justify-content: center;
+  transition: background-color .1s linear;
+}
+
+.mpc__pad--active {
+  background-color: #f80;
+  transition-duration: 0s;
+}
