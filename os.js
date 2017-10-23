@@ -31,16 +31,15 @@
             for (var i = 0; i < btn.length; i++) {
     btn[i].addEventListener('mousedown', clickPlayOn);
   btn[i].addEventListener('mouseup', clickPlayOff);
-    btn[i].addEventListener('touchenter', clickPlayOn);
-   btn[i].addEventListener('touchleave', clickPlayOff);
+    btn[i].addEventListener('touchstart', clickPlayOn);
+   btn[i].addEventListener('touchend', clickPlayOff);
 }
             
             
             
              document.getElementById('container').oncontextmenu = function(event) {
     event.preventDefault();
-    event.stopPropagation(); // not necessary in my case, could leave in case stopImmediateProp isn't available? 
-    event.stopImmediatePropagation();
+    event.stopPropagation();
     return false;
 };  
             
